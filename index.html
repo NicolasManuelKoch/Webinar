@@ -1,77 +1,419 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
   <meta
     name="description"
     content="A plain-language explanation of a four-week study examining whether AI chatbot conversations could reduce loneliness and support well-being, social interaction, and cognitive functioning in older adults."
   >
+
   <title>1. What was this research about? | AI Chatbots Webinar</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <!-- Existing webinar JavaScript -->
   <script src="app.js" defer></script>
+
+  <!-- Password-screen styling -->
+  <style>
+
+    /* ==========================================
+       PASSWORD SCREEN
+       ========================================== */
+
+    .password-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 24px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f5f7fa 0%,
+          #eef2f7 100%
+        );
+    }
+
+
+    .password-gate.unlocked {
+      display: none;
+    }
+
+
+    .password-box {
+      width: 100%;
+      max-width: 460px;
+
+      box-sizing: border-box;
+
+      padding: 42px;
+
+      background: #ffffff;
+
+      border: 1px solid rgba(0, 0, 0, 0.08);
+
+      border-radius: 18px;
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.10);
+
+      text-align: left;
+    }
+
+
+    .password-box .password-eyebrow {
+      display: inline-block;
+
+      margin-bottom: 8px;
+
+      font-size: 0.8rem;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+
+      color: #53657d;
+    }
+
+
+    .password-box h1 {
+      margin: 0 0 12px;
+
+      font-size: 2rem;
+      line-height: 1.15;
+    }
+
+
+    .password-box > p {
+      margin: 0;
+
+      line-height: 1.6;
+
+      color: #56616f;
+    }
+
+
+    .password-box form {
+      display: flex;
+      flex-direction: column;
+
+      gap: 10px;
+
+      margin-top: 26px;
+    }
+
+
+    .password-box label {
+      font-size: 0.95rem;
+      font-weight: 700;
+
+      color: #222;
+    }
+
+
+    .password-box input {
+      width: 100%;
+
+      box-sizing: border-box;
+
+      padding: 14px 16px;
+
+      border: 1px solid #c9d1dc;
+
+      border-radius: 9px;
+
+      background: #ffffff;
+
+      font: inherit;
+      font-size: 1rem;
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+
+    .password-box input:focus {
+      outline: none;
+
+      border-color: #496fc5;
+
+      box-shadow:
+        0 0 0 3px rgba(73, 111, 197, 0.15);
+    }
+
+
+    .password-box button {
+      margin-top: 5px;
+
+      padding: 14px 18px;
+
+      border: none;
+
+      border-radius: 9px;
+
+      background: #17243b;
+      color: #ffffff;
+
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.15s ease,
+        opacity 0.15s ease;
+    }
+
+
+    .password-box button:hover {
+      opacity: 0.92;
+    }
+
+
+    .password-box button:active {
+      transform: scale(0.99);
+    }
+
+
+    .password-error {
+      min-height: 24px;
+
+      margin: 4px 0 0;
+
+      color: #b42318;
+
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+
+    @media (max-width: 600px) {
+
+      .password-gate {
+        padding: 16px;
+      }
+
+      .password-box {
+        padding: 30px 24px;
+      }
+
+      .password-box h1 {
+        font-size: 1.7rem;
+      }
+
+    }
+
+  </style>
+
 </head>
 
+
 <body>
-<a class="skip-link" href="#main">Skip to main content</a>
 
-<header class="site-header">
-  <div class="header-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-mark">AI</span>
-      <span class="brand-copy">
-        Chatbots &amp; Connection
-        <small>Interactive webinar</small>
-      </span>
-    </a>
 
-    <div class="header-actions">
-      <button class="quiz-launch" data-open-quiz>Knowledge Quest</button>
-    </div>
+<!-- ==========================================
+     PASSWORD GATE
+     ========================================== -->
+
+<div
+  id="passwordGate"
+  class="password-gate"
+  aria-label="Password required"
+>
+
+  <div class="password-box">
+
+    <span class="password-eyebrow">
+      Private webinar
+    </span>
+
+    <h1>
+      Enter password
+    </h1>
+
+    <p>
+      Please enter the password you received to access this webinar.
+    </p>
+
+
+    <form id="passwordForm">
+
+      <label for="sitePassword">
+        Password
+      </label>
+
+      <input
+        type="password"
+        id="sitePassword"
+        name="sitePassword"
+        autocomplete="current-password"
+        required
+        autofocus
+      >
+
+      <button type="submit">
+        Enter webinar
+      </button>
+
+      <p
+        id="passwordError"
+        class="password-error"
+        role="alert"
+        aria-live="polite"
+      ></p>
+
+    </form>
+
   </div>
 
-  <nav class="chapter-nav" aria-label="Webinar chapters">
+</div>
+
+
+
+<!-- ==========================================
+     MAIN WEBSITE
+     ========================================== -->
+
+<a
+  class="skip-link"
+  href="#main"
+>
+  Skip to main content
+</a>
+
+
+
+<header class="site-header">
+
+  <div class="header-inner">
+
+    <a
+      class="brand"
+      href="index.html"
+    >
+
+      <span class="brand-mark">
+        AI
+      </span>
+
+      <span class="brand-copy">
+        Chatbots &amp; Connection
+
+        <small>
+          Interactive webinar
+        </small>
+      </span>
+
+    </a>
+
+
+    <div class="header-actions">
+
+      <button
+        class="quiz-launch"
+        data-open-quiz
+      >
+        Knowledge Quest
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <nav
+    class="chapter-nav"
+    aria-label="Webinar chapters"
+  >
+
     <ol>
+
       <li>
-        <a href="index.html" aria-current="page">
-          <span>01</span>Research
+        <a
+          href="index.html"
+          aria-current="page"
+        >
+          <span>01</span>
+          Research
         </a>
       </li>
+
 
       <li>
         <a href="knowledge-and-gaps.html">
-          <span>02</span>Knowledge
+          <span>02</span>
+          Knowledge
         </a>
       </li>
+
 
       <li>
         <a href="our-results.html">
-          <span>03</span>Results
+          <span>03</span>
+          Results
         </a>
       </li>
+
 
       <li>
         <a href="ai-chatbot-tips.html">
-          <span>04</span>Tips
+          <span>04</span>
+          Tips
         </a>
       </li>
+
 
       <li>
         <a href="thank-you.html">
-          <span>05</span>Thank you
+          <span>05</span>
+          Thank you
         </a>
       </li>
+
     </ol>
+
   </nav>
+
 </header>
+
+
 
 <main id="main">
 
-  <section class="hero">
-    <div>
-      <span class="eyebrow">Welcome</span>
 
-      <h1>What was this research about?</h1>
+  <!-- ==========================================
+       HERO
+       ========================================== -->
+
+  <section class="hero">
+
+    <div>
+
+      <span class="eyebrow">
+        Welcome
+      </span>
+
+
+      <h1>
+        What was this research about?
+      </h1>
+
 
       <p>
         Welcome to our webinar about AI chatbots, their potential role as companions
@@ -79,43 +421,101 @@
         created this webinar as a thank-you for taking part in our research, and we
         hope you enjoy it.
       </p>
+
     </div>
 
-    <aside class="chapter-badge" aria-label="Chapter 1 of 5">
-      <strong>01 / 05</strong>
-      <span>Webinar chapter</span>
+
+    <aside
+      class="chapter-badge"
+      aria-label="Chapter 1 of 5"
+    >
+
+      <strong>
+        01 / 05
+      </strong>
+
+      <span>
+        Webinar chapter
+      </span>
+
     </aside>
+
   </section>
 
 
-  <section class="video-card" aria-label="Chapter video">
-    <video controls preload="metadata" poster="poster-01.png">
-      <source src="media/01-research-overview.mp4" type="video/mp4">
+
+  <!-- ==========================================
+       VIDEO
+       ========================================== -->
+
+  <section
+    class="video-card"
+    aria-label="Chapter video"
+  >
+
+    <video
+      controls
+      preload="metadata"
+      poster="poster-01.png"
+    >
+
+      <source
+        src="media/01-research-overview.mp4"
+        type="video/mp4"
+      >
+
       Your browser does not support HTML video.
+
     </video>
 
+
     <div class="video-note">
-      <span>Watch the video for a plain-language introduction to the study.</span>
-      <code>media/01-research-overview.mp4</code>
+
+      <span>
+        Watch the video for a plain-language introduction to the study.
+      </span>
+
+      <code>
+        media/01-research-overview.mp4
+      </code>
+
     </div>
+
   </section>
 
 
-  <section class="content-grid" aria-label="Chapter explanation">
+
+  <!-- ==========================================
+       CHAPTER EXPLANATION
+       ========================================== -->
+
+  <section
+    class="content-grid"
+    aria-label="Chapter explanation"
+  >
+
 
     <article class="info-card">
-      <h2>What did we want to find out?</h2>
+
+      <h2>
+        What did we want to find out?
+      </h2>
 
       <p>
         We wanted to examine whether interacting regularly with an AI chatbot could
         help older adults feel less lonely, improve their well-being, and possibly
         support aspects of cognitive functioning.
       </p>
+
     </article>
 
 
+
     <article class="info-card">
-      <h2>How could a chatbot help?</h2>
+
+      <h2>
+        How could a chatbot help?
+      </h2>
 
       <p>
         We expected two possible pathways. First, the conversation itself might
@@ -123,11 +523,16 @@
         as a social motivator by encouraging participants to speak with other people,
         go out more often, and seek meaningful social contact.
       </p>
+
     </article>
 
 
+
     <article class="info-card">
-      <h2>How was the chatbot guided?</h2>
+
+      <h2>
+        How was the chatbot guided?
+      </h2>
 
       <p>
         Participants in the AI chatbot group entered a set of instructions that
@@ -136,11 +541,16 @@
         the study's exact expectations could have influenced how they later reported
         their social interactions.
       </p>
+
     </article>
 
 
+
     <article class="info-card">
-      <h2>Why were there two groups?</h2>
+
+      <h2>
+        Why were there two groups?
+      </h2>
 
       <p>
         The AI chatbot group was the main experimental group. To determine whether
@@ -148,11 +558,16 @@
         study participation, or another unrelated factor—we also needed a comparison,
         or control, group.
       </p>
+
     </article>
 
 
+
     <article class="info-card">
-      <h2>What did the control group do?</h2>
+
+      <h2>
+        What did the control group do?
+      </h2>
 
       <p>
         The control group kept a daily audio diary. This activity was similar to
@@ -160,33 +575,48 @@
         removed the central feature being tested: receiving a response. Participants
         in this group talked, but were not talked back to.
       </p>
+
     </article>
 
 
+
     <article class="info-card">
-      <h2>What did we measure?</h2>
+
+      <h2>
+        What did we measure?
+      </h2>
 
       <p>
         We used scientifically studied questionnaires to assess loneliness and
         well-being. Participants also reported how many social interactions they had
         experienced during the previous two weeks.
       </p>
+
     </article>
 
 
+
     <article class="info-card">
-      <h2>How did we examine cognition?</h2>
+
+      <h2>
+        How did we examine cognition?
+      </h2>
 
       <p>
         Participants completed three brief cognitive tests covering working memory,
         attention, executive functioning, and verbal fluency. These tasks helped us
         explore whether either daily activity was associated with cognitive changes.
       </p>
+
     </article>
 
 
+
     <article class="info-card">
-      <h2>How were the results compared?</h2>
+
+      <h2>
+        How were the results compared?
+      </h2>
 
       <p>
         We compared each participant's scores before and after the study. We then
@@ -194,33 +624,63 @@
         change in the audio-diary group to determine whether the groups differed in a
         meaningful way.
       </p>
+
     </article>
 
   </section>
 
 
+
+  <!-- ==========================================
+       KEY TAKEAWAY
+       ========================================== -->
+
   <section class="takeaway">
-    <div class="takeaway-icon">✓</div>
+
+    <div class="takeaway-icon">
+      ✓
+    </div>
+
 
     <div>
-      <h2>Key takeaway</h2>
+
+      <h2>
+        Key takeaway
+      </h2>
+
 
       <p>
         The study tested whether AI chatbots could support older adults both directly,
         through conversation, and indirectly, by encouraging more human social
         interaction—while using an audio-diary group as a fair comparison.
       </p>
+
     </div>
+
   </section>
 
 
+
+  <!-- ==========================================
+       RESOURCES
+       ========================================== -->
+
   <section class="resources">
+
     <div class="section-heading">
 
       <div>
-        <span class="eyebrow">Explore further</span>
-        <h2>Additional links</h2>
+
+        <span class="eyebrow">
+          Explore further
+        </span>
+
+        <h2>
+          Additional links
+        </h2>
+
       </div>
+
 
       <p>
         Learn more about healthy ageing, social connection, and the study.
@@ -229,7 +689,9 @@
     </div>
 
 
+
     <div class="resource-list">
+
 
       <a
         class="resource-link"
@@ -237,10 +699,21 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <strong>National Institute on Aging</strong>
-        <span>Background on healthy ageing, loneliness, and social connection</span>
-        <em>Open resource ↗</em>
+
+        <strong>
+          National Institute on Aging
+        </strong>
+
+        <span>
+          Background on healthy ageing, loneliness, and social connection
+        </span>
+
+        <em>
+          Open resource ↗
+        </em>
+
       </a>
+
 
 
       <a
@@ -249,59 +722,115 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <strong>World Health Organization</strong>
-        <span>Resources on healthy ageing and well-being</span>
-        <em>Open resource ↗</em>
+
+        <strong>
+          World Health Organization
+        </strong>
+
+        <span>
+          Resources on healthy ageing and well-being
+        </span>
+
+        <em>
+          Open resource ↗
+        </em>
+
       </a>
 
+
     </div>
+
   </section>
 
 
-  <nav class="page-controls" aria-label="Chapter controls">
+
+  <!-- ==========================================
+       PAGE CONTROLS
+       ========================================== -->
+
+  <nav
+    class="page-controls"
+    aria-label="Chapter controls"
+  >
+
     <span></span>
+
 
     <button data-open-quiz>
       Quiz progress
     </button>
 
-    <a class="next" href="knowledge-and-gaps.html">
+
+    <a
+      class="next"
+      href="knowledge-and-gaps.html"
+    >
       Next chapter →
     </a>
+
   </nav>
+
 
 </main>
 
 
+
+<!-- ==========================================
+     FOOTER
+     ========================================== -->
+
 <footer class="site-footer">
+
   <div class="footer-inner">
 
     <span>
       AI Chatbots, Connection &amp; Well-being Webinar
     </span>
 
+
     <span>
+
       Chapter 1 of 5 ·
-      <a href="index.html">Start over</a>
+
+      <a href="index.html">
+        Start over
+      </a>
+
     </span>
 
   </div>
+
 </footer>
 
+
+
+<!-- ==========================================
+     QUIZ
+     ========================================== -->
 
 <dialog
   class="quiz-dialog"
   id="quizDialog"
   aria-labelledby="quizTitle"
 >
+
   <div class="quiz-shell">
+
 
     <div class="quiz-top">
 
       <div>
-        <span class="eyebrow">Interactive game</span>
-        <h2 id="quizTitle">Knowledge Quest</h2>
+
+        <span class="eyebrow">
+          Interactive game
+        </span>
+
+        <h2 id="quizTitle">
+          Knowledge Quest
+        </h2>
+
       </div>
+
 
       <button
         class="quiz-close"
@@ -313,10 +842,109 @@
 
     </div>
 
+
     <div id="quizContent"></div>
 
+
   </div>
+
 </dialog>
 
+
+
+<!-- ==========================================
+     PASSWORD JAVASCRIPT
+     ========================================== -->
+
+<script>
+
+  /*
+   * Change this to whatever password you want.
+   */
+  const WEBSITE_PASSWORD = "ChatbotStudy2026";
+
+
+  const passwordGate =
+    document.getElementById("passwordGate");
+
+  const passwordForm =
+    document.getElementById("passwordForm");
+
+  const passwordInput =
+    document.getElementById("sitePassword");
+
+  const passwordError =
+    document.getElementById("passwordError");
+
+
+  /*
+   * Check whether the visitor has already unlocked
+   * the webinar during this browser session.
+   */
+
+  if (
+    sessionStorage.getItem("webinarAuthenticated")
+    === "true"
+  ) {
+
+    passwordGate.classList.add("unlocked");
+
+  }
+
+
+  /*
+   * Check the entered password.
+   */
+
+  passwordForm.addEventListener(
+    "submit",
+    function (event) {
+
+      event.preventDefault();
+
+
+      if (
+        passwordInput.value === WEBSITE_PASSWORD
+      ) {
+
+        /*
+         * Remember access for the rest of
+         * the browser session.
+         */
+
+        sessionStorage.setItem(
+          "webinarAuthenticated",
+          "true"
+        );
+
+
+        passwordError.textContent = "";
+
+        passwordGate.classList.add("unlocked");
+
+
+      } else {
+
+        /*
+         * Wrong password.
+         */
+
+        passwordError.textContent =
+          "Incorrect password. Please try again.";
+
+
+        passwordInput.value = "";
+
+        passwordInput.focus();
+
+      }
+
+    }
+  );
+
+</script>
+
+
 </body>
+
 </html>
